@@ -17,3 +17,16 @@ Route::get('/', function () {
 
 Route::get('/product/all', 'ProductController@getAll');
 Route::get('/product/{id}', 'ProductController@get');
+
+
+//Routes that requires the user to be authenticated
+Route::group(['middleware' => 'jwt.auth'], function() {
+
+});
+
+//Routes that requires the user to be an ADMIN
+Route::group(['middleware' => 'admin'], function() {
+    Route::post('/product/create', 'ProductController@create');
+    Route::post('/product/update/{id}', 'ProductController@update');
+    Route::delete('product/{id}', 'ProductController@delete');
+});
