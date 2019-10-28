@@ -29,4 +29,8 @@ Route::group(['middleware' => 'admin'], function() {
     Route::post('/product/create', 'ProductController@create');
     Route::post('/product/update/{id}', 'ProductController@update');
     Route::delete('product/{id}', 'ProductController@delete');
+
+    Route::get('/discount/all', 'DiscountController@getAll');
+    Route::get('/discount/{productId}', 'DiscountController@getByProject');
+    Route::post('/discount/create', 'DiscountController@create');
 });
