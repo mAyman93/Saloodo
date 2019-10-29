@@ -13,6 +13,7 @@ class Product extends Model
      * @var array
      */
     protected $hidden = ['created_at', 'updated_at'];
+
     public function get($id)
     {
         return Product::find($id);
@@ -21,14 +22,6 @@ class Product extends Model
     public function getAll()
     {
         return Product::all();
-    }
-
-    public function getAllProductsDetails()
-    {
-        return Product::select([
-            'name', 'description', 'price', 'image_url', 'quantity', 'amount', 'type'])
-            ->leftJoin('discounts', 'products.id', '=', 'discounts.product_id')
-            ->get();
     }
 
     public function calculateFinalPrice()
@@ -54,7 +47,23 @@ class Product extends Model
         } else if($discountType == 'concrete') {
             return $productPrice - $discountAmount;
         }
+    }
 
+    public function create($productData)
+    {
+        $product = new Product; // Product::create($productData);
+        $product->name = $productData['name'];
+        $product->description = $productData['description'];
+        $product->price = $productData['price'];
+        $product->quantity = $productData['quantity'];
+        $product->image_url = $productData['image_url'];
+        $product->save();
+        return $product->id;
+    }
+
+    public function scopeBundle($query)
+    {
+        return $query->join('bundles', 'products.id', '=', 'bundles.related_product_id');
     }
 
 }

@@ -39,11 +39,27 @@ class ProductController extends Controller
      */
     public function getAll(Request $request)
     {
-        $products = $this->productsModel->getAllProductsDetails();
+        $products = $this->productsModel->getAll();
         foreach($products as $product) {
             $product->calculateFinalPrice();
         }
         return response()->json(['products' => $products]);
+    }
+
+    /**
+     * Create new product
+     * 
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function create(Request $request)
+    {
+        if(!$request->has('name') || !$request->has('price') 
+        || !$request->has('quantity')) {
+            return response()->json(['error' => 'missing parameters'], 400);
+        }
+        $newProductId = $this->productsModel->create($request->post());
+        return response()->json(['product_id' => $newProductId]);
     }
     
 }

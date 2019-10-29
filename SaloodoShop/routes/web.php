@@ -18,6 +18,9 @@ Route::get('/', function () {
 Route::get('/product/all', 'ProductController@getAll');
 Route::get('/product/{id}', 'ProductController@get');
 
+Route::get('/bundle/all', 'BundleController@getAll');
+Route::post('/bundle/create', 'BundleController@create');
+
 
 //Routes that requires the user to be authenticated
 Route::group(['middleware' => 'jwt.auth'], function() {
