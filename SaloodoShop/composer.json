@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "darryldecode/cart": "~4.0",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^5.7",
         "laravel/tinker": "^1.0",
@@ -28,7 +29,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": ["laravel/dusk"]
         }
     },
     "autoload": {

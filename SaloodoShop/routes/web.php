@@ -25,7 +25,11 @@ Route::get('/product/{id}', 'ProductController@get');
 
 //Routes that requires the user to be authenticated
 Route::group(['middleware' => 'jwt.auth'], function() {
-    
+    // Route::post('/cart/view', 'CartController');
+    // Route::post('/cart/addProduct');
+    // Route::post('/cart/removeProduct');
+    // Route::post('/cart/empty');
+    // Route::get('/cart/checkout');
 });
 
 //Routes that requires the user to be an ADMIN
