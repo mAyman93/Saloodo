@@ -66,11 +66,4 @@ class Product extends Model
         return $query->join('bundles', 'products.id', '=', 'bundles.related_product_id');
     }
 
-    public function delete($id)
-    {
-        $product = Product::find($id);
-        $product->delete();
-        return true;
-    }
-
 }
