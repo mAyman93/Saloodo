@@ -61,5 +61,13 @@ class ProductController extends Controller
         $newProductId = $this->productsModel->create($request->post());
         return response()->json(['product_id' => $newProductId]);
     }
+
+    public function delete(Request $request)
+    {
+        $productId = $request->id;
+        if($this->productsModel->delete($productId)) {
+            return response()->json('Product deleted!');
+        }
+    }
     
 }

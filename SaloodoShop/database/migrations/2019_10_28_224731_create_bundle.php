@@ -17,7 +17,7 @@ class CreateBundle extends Migration
             $table->bigIncrements('id');
             $table->integer('related_product_id');
             $table->json('products_ids');
-            $table->foreign('related_product_id')->references('id')->on('products')->unique();
+            $table->foreign('related_product_id')->references('id')->on('products')->unique()->onDelete('cascade');
             $table->timestamps();
         });
     }

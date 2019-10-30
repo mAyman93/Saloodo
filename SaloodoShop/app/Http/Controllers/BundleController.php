@@ -19,6 +19,13 @@ class BundleController extends Controller
         return response()->json(['bundles' => $bundles]);
     }
 
+    public function get(Request $request)
+    {
+        $bundleId = $request->id;
+        $bundle = $this->bundlesModel->get($bundleId);
+        return response()->json(['bundle' => $bundle]);
+    }
+
     public function create(Request $request)
     {
         if(!$request->has('products') || !$request->has('name') || !$request->has('price') 

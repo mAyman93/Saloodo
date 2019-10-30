@@ -33,4 +33,12 @@ class DiscountController extends Controller
         }
         return $this->discountsModel->create($request->post());
     }
+
+    public function delete(Request $request)
+    {
+        $discountId = $request->id;
+        if($this->discountsModel->delete($discountId)) {
+            return response()->json('Discount deleted!');
+        }
+    }
 }

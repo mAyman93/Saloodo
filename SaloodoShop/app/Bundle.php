@@ -20,6 +20,11 @@ class Bundle extends Product
         return Bundle::all();
     }
 
+    public function get($id)
+    {
+        return Bundle::find($id);
+    }
+
     public function create($bundleData)
     {
         $productsArray = $bundleData['products'];

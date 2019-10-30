@@ -32,4 +32,11 @@ class Discount extends Model
         );
         return $discount->id;
     }
+
+    public function delete($id)
+    {
+        $discount = Discount::find($id);
+        $discount->delete();
+        return true;
+    }
 }

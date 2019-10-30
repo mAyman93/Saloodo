@@ -19,8 +19,7 @@ Route::get('/product/all', 'ProductController@getAll');
 Route::get('/product/{id}', 'ProductController@get');
 
 Route::get('/bundle/all', 'BundleController@getAll');
-Route::post('/bundle/create', 'BundleController@create');
-
+Route::get('/bundle/{id}', 'BundleController@get');
 
 //Routes that requires the user to be authenticated
 Route::group(['middleware' => 'jwt.auth'], function() {
@@ -36,4 +35,8 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('/discount/all', 'DiscountController@getAll');
     Route::get('/discount/{productId}', 'DiscountController@getByProject');
     Route::post('/discount/create', 'DiscountController@create');
+    Route::delete('/discount/{id}', 'DiscountController@delete');
+
+    Route::post('/bundle/create', 'BundleController@create');
+    Route::delete('/bundle/{id}', 'BundleController@delete');
 });

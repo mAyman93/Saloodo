@@ -19,7 +19,7 @@ class CreateDiscountsTable extends Migration
             $table->string('type');
             $table->double('amount');
             $table->timestamp('expiry_date');
-            $table->foreign('product_id')->references('id')->on('products')->unique();
+            $table->foreign('product_id')->references('id')->on('products')->unique()->onDelete('cascade');
             $table->timestamps();
         });
     }
