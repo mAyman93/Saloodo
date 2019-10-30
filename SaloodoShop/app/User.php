@@ -64,6 +64,9 @@ class User extends Authenticatable implements JWTSubject
         $encryptedPassword = md5($credentials['password'] . env('SALT'));
         $credentials['password'] = $encryptedPassword;
         $user = User::where($credentials)->first();
+        if(!$user) {
+            return response()->json(['error' => $credentials], 400);
+        }
         $token = JWTAuth::fromUser($user);
         return response()->json(compact('token'));
     }

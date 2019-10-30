@@ -51,7 +51,7 @@ class Product extends Model
 
     public function create($productData)
     {
-        $product = new Product; // Product::create($productData);
+        $product = new Product;
         $product->name = $productData['name'];
         $product->description = $productData['description'];
         $product->price = $productData['price'];
@@ -59,6 +59,17 @@ class Product extends Model
         $product->image_url = $productData['image_url'];
         $product->save();
         return $product->id;
+    }
+
+    public static function validateAndUpdateQuantity($id, $quantity)
+    {
+        $product = Product::where('id', $id)->where('quantity', '>=', $quantity)->first();
+        if(!$product) {
+            return false;
+        }
+        $product->quantity = $product->quantity - $quantity;
+        $product->save();
+        return true;
     }
 
     public function scopeBundle($query)

@@ -18,18 +18,19 @@ Route::get('/', function () {
 Route::post('/login', 'AuthController@login');
 Route::post('/admin/login', 'AuthController@adminLogin');
 
-Route::get('/bundle/all', 'BundleController@getAll');
-Route::get('/bundle/{id}', 'BundleController@get');
 Route::get('/product/all', 'ProductController@getAll');
 Route::get('/product/{id}', 'ProductController@get');
+Route::get('/bundle/all', 'BundleController@getAll');
+Route::get('/bundle/{id}', 'BundleController@get');
 
 //Routes that requires the user to be authenticated
 Route::group(['middleware' => 'jwt.auth'], function() {
-    // Route::post('/cart/view', 'CartController');
-    // Route::post('/cart/addProduct');
-    // Route::post('/cart/removeProduct');
-    // Route::post('/cart/empty');
-    // Route::get('/cart/checkout');
+    Route::post('/cart/view', 'CartController@viewCart');
+    Route::post('/cart/addProduct', 'CartController@addProduct');
+    Route::post('/cart/changeProductQuantity', 'CartController@changeProductQuantity');
+    Route::post('/cart/removeProduct', 'CartController@removeProduct');
+    Route::post('/cart/empty', 'CartController@empty');
+    Route::get('/cart/checkout', 'CartController@checkout');
 });
 
 //Routes that requires the user to be an ADMIN
